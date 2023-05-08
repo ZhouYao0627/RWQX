@@ -17,4 +17,12 @@ public interface VideoService {
     ResponseEntity<InputStreamResource> getCloudVideo(String CloudName) throws Exception;
 
     ResponseEntity<InputStreamResource> getVRVideo(String VrId) throws Exception;
+
+    ResponseEntity<InputStreamResource> getDnVideo(String dnId) throws FileNotFoundException;
+
+    ResponseEntity<InputStreamResource> getWkVideo(String wkId) throws FileNotFoundException;
+
+    ResponseEntity<InputStreamResource> getYyVideo(String yyId) throws FileNotFoundException;
+
+    ResponseEntity<InputStreamResource> getGyVideo(String gyId) throws FileNotFoundException;
 }

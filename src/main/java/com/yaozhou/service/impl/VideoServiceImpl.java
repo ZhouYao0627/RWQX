@@ -45,6 +45,30 @@ public class VideoServiceImpl implements VideoService {
         return getVideo(dir, VrId);
     }
 
+    @Override
+    public ResponseEntity<InputStreamResource> getDnVideo(String dnId) throws FileNotFoundException {
+        String dir = "dn";
+        return getVideo(dir, dnId);
+    }
+
+    @Override
+    public ResponseEntity<InputStreamResource> getWkVideo(String wkId) throws FileNotFoundException {
+        String dir = "wk";
+        return getVideo(dir, wkId);
+    }
+
+    @Override
+    public ResponseEntity<InputStreamResource> getYyVideo(String yyId) throws FileNotFoundException {
+        String dir = "yy";
+        return getVideo(dir, yyId);
+    }
+
+    @Override
+    public ResponseEntity<InputStreamResource> getGyVideo(String gyId) throws FileNotFoundException {
+        String dir = "gy";
+        return getVideo(dir, gyId);
+    }
+
     // 通用方法
     public ResponseEntity<InputStreamResource> getVideo(String dir, String idOrName) throws FileNotFoundException {
         // 读取视频文件
