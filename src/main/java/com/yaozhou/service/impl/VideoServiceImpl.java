@@ -17,96 +17,38 @@ import java.net.URLEncoder;
 public class VideoServiceImpl implements VideoService {
     @Override
     public ResponseEntity<InputStreamResource> getFxVideo(String FxId) throws Exception {
-        // 读取视频文件
-        File videoFile = new File("src/main/resources/video/fx/" + FxId + ".mp4");
-        if (!videoFile.exists()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        // 设置Header头，使浏览器可以识别视频文件类型
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
-        headers.add("Pragma", "no-cache");
-        headers.add("Expires", "0");
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + FxId);
-        headers.add("Accept-Ranges", "bytes");
-        //headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename*=UTF-8''" + URLEncoder.
-        //        encode(fileName, "UTF-8").replaceAll("\\+", "\\ ") + ".mp4");
-
-
-        // 将视频文件转换成InputStreamResource
-        InputStreamResource inputStreamResource = new InputStreamResource(new FileInputStream(videoFile));
-
-        // 返回ResponseEntity对象，包含InputStreamResource和Header头信息
-        return ResponseEntity.ok()
-                .headers(headers)
-                .contentLength(videoFile.length())
-                .contentType(MediaType.parseMediaType("video/mp4"))
-                .body(inputStreamResource);
+        String dir = "fx";
+        return getVideo(dir, FxId);
     }
 
     @Override
     public ResponseEntity<InputStreamResource> getDsVideo(String DsId) throws Exception {
-        // 读取视频文件
-        File videoFile = new File("src/main/resources/video/ds/" + DsId + ".mp4");
-        if (!videoFile.exists()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        // 设置Header头，使浏览器可以识别视频文件类型
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
-        headers.add("Pragma", "no-cache");
-        headers.add("Expires", "0");
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + DsId);
-        headers.add("Accept-Ranges", "bytes");
-        //headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename*=UTF-8''" + URLEncoder.
-        //        encode(fileName, "UTF-8").replaceAll("\\+", "\\ ") + ".mp4");
-
-        // 将视频文件转换成InputStreamResource
-        InputStreamResource inputStreamResource = new InputStreamResource(new FileInputStream(videoFile));
-
-        // 返回ResponseEntity对象，包含InputStreamResource和Header头信息
-        return ResponseEntity.ok()
-                .headers(headers)
-                .contentLength(videoFile.length())
-                .contentType(MediaType.parseMediaType("video/mp4"))
-                .body(inputStreamResource);
+        String dir = "ds";
+        return getVideo(dir, DsId);
     }
 
     @Override
     public ResponseEntity<InputStreamResource> getKpVideo(String kpId) throws Exception {
-        // 读取视频文件
-        File videoFile = new File("src/main/resources/video/kp/" + kpId + ".mp4");
-        if (!videoFile.exists()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        // 设置Header头，使浏览器可以识别视频文件类型
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
-        headers.add("Pragma", "no-cache");
-        headers.add("Expires", "0");
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + kpId);
-        headers.add("Accept-Ranges", "bytes");
-        //headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename*=UTF-8''" + URLEncoder.
-        //        encode(fileName, "UTF-8").replaceAll("\\+", "\\ ") + ".mp4");
-
-        // 将视频文件转换成InputStreamResource
-        InputStreamResource inputStreamResource = new InputStreamResource(new FileInputStream(videoFile));
-
-        // 返回ResponseEntity对象，包含InputStreamResource和Header头信息
-        return ResponseEntity.ok()
-                .headers(headers)
-                .contentLength(videoFile.length())
-                .contentType(MediaType.parseMediaType("video/mp4"))
-                .body(inputStreamResource);
+        String dir = "kp";
+        return getVideo(dir, kpId);
     }
 
     @Override
     public ResponseEntity<InputStreamResource> getCloudVideo(String CloudName) throws Exception {
+        String dir = "cloud";
+        return getVideo(dir, CloudName);
+    }
+
+    @Override
+    public ResponseEntity<InputStreamResource> getVRVideo(String VrId) throws FileNotFoundException {
+        String dir = "vr";
+        return getVideo(dir, VrId);
+    }
+
+    // 通用方法
+    public ResponseEntity<InputStreamResource> getVideo(String dir, String idOrName) throws FileNotFoundException {
         // 读取视频文件
-        File videoFile = new File("src/main/resources/video/cloud/" + CloudName + ".mp4");
+        File videoFile = new File("src/main/resources/video/" + dir + "/" + idOrName + ".mp4");
         if (!videoFile.exists()) {
             return ResponseEntity.notFound().build();
         }
@@ -116,7 +58,7 @@ public class VideoServiceImpl implements VideoService {
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
         headers.add("Pragma", "no-cache");
         headers.add("Expires", "0");
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + CloudName);
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + idOrName);
         headers.add("Accept-Ranges", "bytes");
         //headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename*=UTF-8''" + URLEncoder.
         //        encode(fileName, "UTF-8").replaceAll("\\+", "\\ ") + ".mp4");
@@ -131,4 +73,6 @@ public class VideoServiceImpl implements VideoService {
                 .contentType(MediaType.parseMediaType("video/mp4"))
                 .body(inputStreamResource);
     }
+
+
 }

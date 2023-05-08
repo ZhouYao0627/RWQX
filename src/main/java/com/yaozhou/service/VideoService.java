@@ -15,4 +15,6 @@ public interface VideoService {
     ResponseEntity<InputStreamResource> getKpVideo(String kpId) throws Exception;
 
     ResponseEntity<InputStreamResource> getCloudVideo(String CloudName) throws Exception;
+
+    ResponseEntity<InputStreamResource> getVRVideo(String VrId) throws Exception;
 }

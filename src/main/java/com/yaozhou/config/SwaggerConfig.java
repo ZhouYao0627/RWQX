@@ -16,17 +16,17 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.sangeng.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.yaozhou.controller"))
                 .build();
     }
 
     private ApiInfo apiInfo() {
-        Contact contact = new Contact("yaozhou", "", "yaozhou@nuist.edu.cn");
+        Contact contact = new Contact("yaozhou", "https://github.com/ZhouYao0627/RWQX", "yaozhou@nuist.edu.cn");
         return new ApiInfoBuilder()
                 .title("气象科普项目")
                 .description("为孩子们创建一个更美好的未来")
                 .contact(contact)   // 联系方式
-                .version("V1.0")  // 版本
+                .version("V 1.0")  // 版本
                 .build();
     }
 }

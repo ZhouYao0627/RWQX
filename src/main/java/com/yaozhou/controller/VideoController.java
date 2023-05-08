@@ -54,6 +54,14 @@ public class VideoController {
         return fxService.getCloudVideo(CloudName);
     }
 
+    // VR气象站
+    @GetMapping("/VR")
+    @ApiOperation(value = "VR气象站")
+    @ApiImplicitParams(@ApiImplicitParam(name = "VrId", value = "视频id，共有1个视频，视频id为0，1，2，...，15，其中视频id为0代表气象站介绍视频"))
+    public ResponseEntity<InputStreamResource> getVRVideo(@RequestParam("VrId") String VrId) throws Exception {
+        return fxService.getVRVideo(VrId);
+    }
+
 }
 
 
