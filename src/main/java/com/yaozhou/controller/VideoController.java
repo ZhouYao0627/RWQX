@@ -33,7 +33,7 @@ public class VideoController {
     // 大师云集
     @GetMapping("/DsVideo")
     @ApiOperation(value = "大师云集")
-    @ApiImplicitParams(@ApiImplicitParam(name = "DsId", value = "视频id，共有3个视频，视频id分别为1，2，3"))
+    @ApiImplicitParams(@ApiImplicitParam(name = "DsId", value = "视频id，共有4个视频，视频id分别为1，2，3，4"))
     public ResponseEntity<InputStreamResource> getDsVideo(@RequestParam("DsId") String DsId) throws Exception {
         return fxService.getDsVideo(DsId);
     }
@@ -41,7 +41,7 @@ public class VideoController {
     // 科普基地
     @GetMapping("/KpVideo")
     @ApiOperation(value = "科普基地")
-    @ApiImplicitParams(@ApiImplicitParam(name = "KpId", value = "视频id，共有4个视频，视频id分别为0，1，2，3，其中视频id为0代表科普基地总体介绍视频"))
+    @ApiImplicitParams(@ApiImplicitParam(name = "KpId", value = "视频id，共有5个视频，视频id分别为0，1，2，3，4，其中视频id为0代表科普基地总体介绍视频"))
     public ResponseEntity<InputStreamResource> getKpVideo(@RequestParam("KpId") String KpId) throws Exception {
         return fxService.getKpVideo(KpId);
     }
