@@ -19,8 +19,5 @@ public interface ImageService {
 
     List<String> getXFTImages();
 
-    //ResponseResult getWord();
-    //
-    //ResponseEntity<InputStreamResource> getVideo() throws FileNotFoundException;
 
 }
