@@ -1,4 +1,4 @@
-package com.yaozhou.utils;
+package com.yaozhou.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.yaozhou.enums.AppHttpCodeEnum;

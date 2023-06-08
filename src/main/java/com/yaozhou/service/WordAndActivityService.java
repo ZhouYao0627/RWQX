@@ -1,6 +1,6 @@
 package com.yaozhou.service;
 
-import com.yaozhou.utils.ResponseResult;
+import com.yaozhou.domain.ResponseResult;
 
 import java.io.IOException;
 

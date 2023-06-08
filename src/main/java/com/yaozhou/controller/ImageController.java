@@ -1,7 +1,6 @@
 package com.yaozhou.controller;
 
 import com.yaozhou.service.ImageService;
-import com.yaozhou.utils.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

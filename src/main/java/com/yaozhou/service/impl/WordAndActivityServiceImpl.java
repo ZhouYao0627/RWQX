@@ -2,9 +2,8 @@ package com.yaozhou.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.yaozhou.service.WordAndActivityService;
-import com.yaozhou.utils.ResponseResult;
+import com.yaozhou.domain.ResponseResult;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;

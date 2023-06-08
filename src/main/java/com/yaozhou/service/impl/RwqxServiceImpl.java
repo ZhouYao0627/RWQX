@@ -1,9 +1,8 @@
 package com.yaozhou.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.yaozhou.service.RwqxService;
-import com.yaozhou.utils.ResponseResult;
+import com.yaozhou.domain.ResponseResult;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;

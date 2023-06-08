@@ -1,14 +1,9 @@
 package com.yaozhou.controller;
 
 import com.yaozhou.service.RwqxService;
-import com.yaozhou.utils.ResponseResult;
+import com.yaozhou.domain.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.HashMap;
 
 @RestController
 @RequestMapping("/rwqx")

@@ -1,7 +1,7 @@
 package com.yaozhou.controller;
 
 import com.yaozhou.service.WordAndActivityService;
-import com.yaozhou.utils.ResponseResult;
+import com.yaozhou.domain.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
