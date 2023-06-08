@@ -1,5 +1,6 @@
 package com.yaozhou;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
@@ -15,6 +16,7 @@ import javax.servlet.MultipartConfigElement;
 @SpringBootApplication
 @EnableWebMvc
 @EnableSwagger2
+@MapperScan("com.yaozhou.mapper")
 public class RWQXApplication {
     public static void main(String[] args) {
         SpringApplication.run(RWQXApplication.class, args);

@@ -6,12 +6,14 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginUser implements UserDetails {
+public class LoginUser implements UserDetails{
+    //private static final long serialVersionUID = -1;
     private User user;
 
     @Override

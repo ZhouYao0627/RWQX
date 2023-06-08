@@ -13,7 +13,6 @@ import com.yaozhou.utils.JwtUtil;
 import com.yaozhou.utils.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -45,9 +44,9 @@ public class LoginServiceImpl implements LoginService {
         String jwt = JwtUtil.createJWT(userId);
 
         // 把用户信息存入redis
-        redisCache.setCacheObject(LOGIN_KEY + userId, loginUser);
+        redisCache.setCacheObject(LOGIN_KEY + userId, loginUser);  // 报错
 
-        UserInfoVo userInfoVo = BeanCopyUtils.copyBean(user, UserInfoVo.class);
+        UserInfoVo userInfoVo = BeanCopyUtils.copyBean(loginUser.getUser(), UserInfoVo.class);
         LoginVo loginVo = new LoginVo(jwt, userInfoVo);
         return ResponseResult.okResult(loginVo);
     }

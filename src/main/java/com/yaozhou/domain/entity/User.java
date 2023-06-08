@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("user")
-public class User {
+public class User implements Serializable {
     //主键@TableId
     @TableId
     private Long id;

@@ -1,6 +1,5 @@
 package com.yaozhou.service;
 
-import com.yaozhou.utils.ResponseResult;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.ResponseEntity;
 
