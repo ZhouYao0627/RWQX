@@ -4,10 +4,7 @@ import com.yaozhou.domain.ResponseResult;
 import com.yaozhou.domain.entity.User;
 import com.yaozhou.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class LoginController {
@@ -18,6 +15,12 @@ public class LoginController {
     public ResponseResult login(@RequestBody User user) {
         return loginService.login(user);
     }
+
+    @GetMapping("/verifyCode")
+    public ResponseResult verifyCode() {
+        return loginService.verifyCode();
+    }
+
 
     @PostMapping("/logout")
     public ResponseResult logout() {

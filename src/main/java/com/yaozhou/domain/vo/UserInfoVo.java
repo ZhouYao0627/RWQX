@@ -22,4 +22,5 @@ public class UserInfoVo {
     private String type;
     //头像
     private String avatar;
+    private String code;
 }

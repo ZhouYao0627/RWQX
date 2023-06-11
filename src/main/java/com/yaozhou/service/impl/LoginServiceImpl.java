@@ -1,5 +1,6 @@
 package com.yaozhou.service.impl;
 
+import cn.hutool.core.util.RandomUtil;
 import com.yaozhou.domain.ResponseResult;
 import com.yaozhou.domain.entity.LoginUser;
 import com.yaozhou.domain.entity.User;
@@ -38,15 +39,20 @@ public class LoginServiceImpl implements LoginService {
             throw new RuntimeException("用户名或密码错误");
         }
 
-
-
-        // 获取userid 生成token
+        // 获取userId 生成token
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
         String userId = loginUser.getUser().getId().toString();
         String jwt = JwtUtil.createJWT(userId);
 
         // 把用户信息存入redis
-        redisCache.setCacheObject("Login:" + userId, loginUser);
+        redisCache.setCacheObject("login:user" + userId, loginUser);
+
+        // 判断验证码是否正确
+        String userCode = user.getCode();
+        String code = redisCache.getCacheObject("login:code");
+        if (!userCode.equals(code)) {
+            throw new SystemException(AppHttpCodeEnum.CODE_ERROR);
+        }
 
         UserInfoVo userInfoVo = BeanCopyUtils.copyBean(loginUser.getUser(), UserInfoVo.class);
         LoginVo loginVo = new LoginVo(jwt, userInfoVo);
@@ -63,6 +69,13 @@ public class LoginServiceImpl implements LoginService {
         //删除redis中的用户信息
         redisCache.deleteObject(LOGIN_KEY + userId);
         return ResponseResult.okResult();
+    }
+
+    @Override
+    public ResponseResult verifyCode() {
+        String code = RandomUtil.randomNumbers(4);
+        redisCache.setCacheObject("login:code", code);
+        return ResponseResult.okResult(code);
     }
 }
 

@@ -3,6 +3,7 @@ package com.yaozhou.domain.entity;
 
 import java.io.Serializable;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,5 +41,7 @@ public class User implements Serializable {
     private String sex;
     //头像
     private String avatar;
+    @TableField(exist = false)
+    private String code;
 }
 
