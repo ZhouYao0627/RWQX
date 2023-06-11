@@ -123,27 +123,28 @@ public class WordAndActivityServiceImpl implements WordAndActivityService {
 
     @Override
     public ResponseResult getGCZActivityMsg(String activityId) throws IOException {
-        String activityName = "GCZ";
-        // 读取文本数据
-        String textData = getTextData(activityName, activityId);
-        // 读取图片文件列表
-        List<BufferedImage> images = getImageDataList(activityName, activityId);
-        // 将图片转换为Base64编码
-        List<String> imageDataList = new ArrayList<>();
-        for (BufferedImage image : images) {
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            ImageIO.write(image, "jpg", outputStream);
-            String imageData = Base64.getEncoder().encodeToString(outputStream.toByteArray());
-            imageDataList.add(imageData);
-        }
-
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("word", textData);
-        JSONArray imageDataArray = new JSONArray(imageDataList);
-        map.put("image", imageDataArray);
-        Object json = JSON.toJSON(map);
-        // 返回JSON字符串
-        return ResponseResult.okResult(json);
+        //String activityName = "GCZ";
+        //// 读取文本数据
+        //String textData = getTextData(activityName, activityId);
+        //// 读取图片文件列表
+        //List<BufferedImage> images = getImageDataList(activityName, activityId);
+        //// 将图片转换为Base64编码
+        //List<String> imageDataList = new ArrayList<>();
+        //for (BufferedImage image : images) {
+        //    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        //    ImageIO.write(image, "jpg", outputStream);
+        //    String imageData = Base64.getEncoder().encodeToString(outputStream.toByteArray());
+        //    imageDataList.add(imageData);
+        //}
+        //
+        //HashMap<String, Object> map = new HashMap<>();
+        //map.put("word", textData);
+        //JSONArray imageDataArray = new JSONArray(imageDataList);
+        //map.put("image", imageDataArray);
+        //Object json = JSON.toJSON(map);
+        //// 返回JSON字符串
+        //return ResponseResult.okResult(json);
+        return null;
     }
 
     /**
@@ -189,27 +190,28 @@ public class WordAndActivityServiceImpl implements WordAndActivityService {
 
     @Override
     public ResponseResult getDSGActivityMsg(String activityId) throws IOException {
-        String activityName = "DSG";
-        // 读取文本数据
-        String textData = getTextData(activityName, activityId);
-        // 读取图片文件列表
-        List<BufferedImage> images = getImageDataList(activityName, activityId);
-        // 将图片转换为Base64编码
-        List<String> imageDataList = new ArrayList<>();
-        for (BufferedImage image : images) {
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            ImageIO.write(image, "jpg", outputStream);
-            String imageData = Base64.getEncoder().encodeToString(outputStream.toByteArray());
-            imageDataList.add(imageData);
-        }
-
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("word", textData);
-        JSONArray imageDataArray = new JSONArray(imageDataList);
-        map.put("image", imageDataArray);
-        Object json = JSON.toJSON(map);
-        // 返回JSON字符串
-        return ResponseResult.okResult(json);
+        //String activityName = "DSG";
+        //// 读取文本数据
+        //String textData = getTextData(activityName, activityId);
+        //// 读取图片文件列表
+        //List<BufferedImage> images = getImageDataList(activityName, activityId);
+        //// 将图片转换为Base64编码
+        //List<String> imageDataList = new ArrayList<>();
+        //for (BufferedImage image : images) {
+        //    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        //    ImageIO.write(image, "jpg", outputStream);
+        //    String imageData = Base64.getEncoder().encodeToString(outputStream.toByteArray());
+        //    imageDataList.add(imageData);
+        //}
+        //
+        //HashMap<String, Object> map = new HashMap<>();
+        //map.put("word", textData);
+        //JSONArray imageDataArray = new JSONArray(imageDataList);
+        //map.put("image", imageDataArray);
+        //Object json = JSON.toJSON(map);
+        //// 返回JSON字符串
+        //return ResponseResult.okResult(json);
+        return null;
     }
 
     /**
@@ -255,27 +257,28 @@ public class WordAndActivityServiceImpl implements WordAndActivityService {
 
     @Override
     public ResponseResult getLDActivityMsg(String activityId) throws IOException {
-        String activityName = "LD";
-        // 读取文本数据
-        String textData = getTextData(activityName, activityId);
-        // 读取图片文件列表
-        List<BufferedImage> images = getImageDataList(activityName, activityId);
-        // 将图片转换为Base64编码
-        List<String> imageDataList = new ArrayList<>();
-        for (BufferedImage image : images) {
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            ImageIO.write(image, "jpg", outputStream);
-            String imageData = Base64.getEncoder().encodeToString(outputStream.toByteArray());
-            imageDataList.add(imageData);
-        }
-
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("word", textData);
-        JSONArray imageDataArray = new JSONArray(imageDataList);
-        map.put("image", imageDataArray);
-        Object json = JSON.toJSON(map);
-        // 返回JSON字符串
-        return ResponseResult.okResult(json);
+        //String activityName = "LD";
+        //// 读取文本数据
+        //String textData = getTextData(activityName, activityId);
+        //// 读取图片文件列表
+        //List<BufferedImage> images = getImageDataList(activityName, activityId);
+        //// 将图片转换为Base64编码
+        //List<String> imageDataList = new ArrayList<>();
+        //for (BufferedImage image : images) {
+        //    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        //    ImageIO.write(image, "jpg", outputStream);
+        //    String imageData = Base64.getEncoder().encodeToString(outputStream.toByteArray());
+        //    imageDataList.add(imageData);
+        //}
+        //
+        //HashMap<String, Object> map = new HashMap<>();
+        //map.put("word", textData);
+        //JSONArray imageDataArray = new JSONArray(imageDataList);
+        //map.put("image", imageDataArray);
+        //Object json = JSON.toJSON(map);
+        //// 返回JSON字符串
+        //return ResponseResult.okResult(json);
+        return null;
     }
 
     /**
@@ -321,26 +324,27 @@ public class WordAndActivityServiceImpl implements WordAndActivityService {
 
     @Override
     public ResponseResult getXFTActivityMsg(String activityId) throws IOException {
-        String activityName = "XFT";
-        // 读取文本数据
-        String textData = getTextData(activityName, activityId);
-        // 读取图片文件列表
-        List<BufferedImage> images = getImageDataList(activityName, activityId);
-        // 将图片转换为Base64编码
-        List<String> imageDataList = new ArrayList<>();
-        for (BufferedImage image : images) {
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            ImageIO.write(image, "jpg", outputStream);
-            String imageData = Base64.getEncoder().encodeToString(outputStream.toByteArray());
-            imageDataList.add(imageData);
-        }
-
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("word", textData);
-        JSONArray imageDataArray = new JSONArray(imageDataList);
-        map.put("image", imageDataArray);
-        Object json = JSON.toJSON(map);
-        // 返回JSON字符串
-        return ResponseResult.okResult(json);
+        //String activityName = "XFT";
+        //// 读取文本数据
+        //String textData = getTextData(activityName, activityId);
+        //// 读取图片文件列表
+        //List<BufferedImage> images = getImageDataList(activityName, activityId);
+        //// 将图片转换为Base64编码
+        //List<String> imageDataList = new ArrayList<>();
+        //for (BufferedImage image : images) {
+        //    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        //    ImageIO.write(image, "jpg", outputStream);
+        //    String imageData = Base64.getEncoder().encodeToString(outputStream.toByteArray());
+        //    imageDataList.add(imageData);
+        //}
+        //
+        //HashMap<String, Object> map = new HashMap<>();
+        //map.put("word", textData);
+        //JSONArray imageDataArray = new JSONArray(imageDataList);
+        //map.put("image", imageDataArray);
+        //Object json = JSON.toJSON(map);
+        //// 返回JSON字符串
+        //return ResponseResult.okResult(json);
+        return null;
     }
 }

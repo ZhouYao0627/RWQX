@@ -1,9 +1,11 @@
 package com.yaozhou.service;
 
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 public interface VideoService {
@@ -24,4 +26,6 @@ public interface VideoService {
     ResponseEntity<InputStreamResource> getYyVideo(String yyId) throws FileNotFoundException;
 
     ResponseEntity<InputStreamResource> getGyVideo(String gyId) throws FileNotFoundException;
+
+    ResponseEntity<InputStreamResource> getFyVideo(String fyName)throws Exception;
 }

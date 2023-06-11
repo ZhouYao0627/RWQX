@@ -21,7 +21,7 @@ public class WebConfig implements WebMvcConfigurer {
         // 设置允许跨域的路径
         registry.addMapping("/**")
                 // 设置允许跨域请求的域名
-                .allowedOrigins("*")
+                .allowedOriginPatterns("*")
                 // 是否允许cookie
                 .allowCredentials(true)
                 // 设置允许的请求方式
@@ -32,24 +32,24 @@ public class WebConfig implements WebMvcConfigurer {
                 .maxAge(3600);
     }
 
-    @Bean //使用@Bean注入fastJsonHttpMessageConvert
-    public HttpMessageConverter fastJsonHttpMessageConverters() {
-        //1.需要定义一个Convert转换消息的对象
-        FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
-        FastJsonConfig fastJsonConfig = new FastJsonConfig();
-        fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
-        fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
+    //@Bean //使用@Bean注入fastJsonHttpMessageConvert
+    //public HttpMessageConverter fastJsonHttpMessageConverters() {
+    //    //1.需要定义一个Convert转换消息的对象
+    //    FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
+    //    FastJsonConfig fastJsonConfig = new FastJsonConfig();
+    //    fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
+    //    fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
+    //
+    //    SerializeConfig.globalInstance.put(Long.class, ToStringSerializer.instance);
+    //
+    //    fastJsonConfig.setSerializeConfig(SerializeConfig.globalInstance);
+    //    fastConverter.setFastJsonConfig(fastJsonConfig);
+    //    HttpMessageConverter<?> converter = fastConverter;
+    //    return converter;
+    //}
 
-        SerializeConfig.globalInstance.put(Long.class, ToStringSerializer.instance);
-
-        fastJsonConfig.setSerializeConfig(SerializeConfig.globalInstance);
-        fastConverter.setFastJsonConfig(fastJsonConfig);
-        HttpMessageConverter<?> converter = fastConverter;
-        return converter;
-    }
-
-    @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.add(fastJsonHttpMessageConverters());
-    }
+    //@Override
+    //public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+    //    converters.add(fastJsonHttpMessageConverters());
+    //}
 }

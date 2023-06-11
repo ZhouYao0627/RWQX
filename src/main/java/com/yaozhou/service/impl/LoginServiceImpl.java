@@ -33,10 +33,12 @@ public class LoginServiceImpl implements LoginService {
     public ResponseResult login(User user) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
-        // 判断认证是否通过
+        // 判断是否通过
         if (Objects.isNull(authenticate)) {
-            throw new SystemException(AppHttpCodeEnum.LOGIN_ERROR);
+            throw new RuntimeException("用户名或密码错误");
         }
+
+
 
         // 获取userid 生成token
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
@@ -44,7 +46,7 @@ public class LoginServiceImpl implements LoginService {
         String jwt = JwtUtil.createJWT(userId);
 
         // 把用户信息存入redis
-        redisCache.setCacheObject(LOGIN_KEY + userId, loginUser);  // 报错
+        redisCache.setCacheObject("Login:" + userId, loginUser);
 
         UserInfoVo userInfoVo = BeanCopyUtils.copyBean(loginUser.getUser(), UserInfoVo.class);
         LoginVo loginVo = new LoginVo(jwt, userInfoVo);

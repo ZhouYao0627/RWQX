@@ -7,11 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import java.io.*;
 
 @Service
 public class VideoServiceImpl implements VideoService {
@@ -69,10 +65,24 @@ public class VideoServiceImpl implements VideoService {
         return getVideo(dir, gyId);
     }
 
-    // 通用方法
-    public ResponseEntity<InputStreamResource> getVideo(String dir, String idOrName) throws FileNotFoundException {
+    @Override
+    public ResponseEntity<InputStreamResource> getFyVideo(String fyName) throws Exception {
+        //if (fyName.equals("r2")) {
+        //    return getVideoNew("D:\\software\\IDEA\\Project\\RWQX\\src\\main\\resources\\video\\fy\\r2.mp4");
+        //} else if (fyName.equals("sp")) {
+        //    return getVideoNew("D:\\software\\IDEA\\Project\\RWQX\\src\\main\\resources\\video\\fy\\sp.mp4");
+        //} else if (fyName.equals("t2m")) {
+        //    return getVideoNew("D:\\software\\IDEA\\Project\\RWQX\\src\\main\\resources\\video\\fy\\t2m.mp4");
+        //} else if (fyName.equals("tp")) {
+        //    return getVideoNew("D:\\software\\IDEA\\Project\\RWQX\\src\\main\\resources\\video\\fy\\tp.mp4");
+        //}
+        String dir = "fy";
+        return getVideo(dir, fyName);
+    }
+
+    public ResponseEntity<InputStreamResource> getVideoNew(String path) throws FileNotFoundException {
         // 读取视频文件
-        File videoFile = new File("src/main/resources/video/" + dir + "/" + idOrName + ".mp4");
+        File videoFile = new File(path);
         if (!videoFile.exists()) {
             return ResponseEntity.notFound().build();
         }
@@ -82,20 +92,42 @@ public class VideoServiceImpl implements VideoService {
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
         headers.add("Pragma", "no-cache");
         headers.add("Expires", "0");
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + idOrName);
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=");
         headers.add("Accept-Ranges", "bytes");
-        //headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename*=UTF-8''" + URLEncoder.
-        //        encode(fileName, "UTF-8").replaceAll("\\+", "\\ ") + ".mp4");
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentDispositionFormData("attachment", "video.mp4");
 
         // 将视频文件转换成InputStreamResource
         InputStreamResource inputStreamResource = new InputStreamResource(new FileInputStream(videoFile));
 
         // 返回ResponseEntity对象，包含InputStreamResource和Header头信息
-        return ResponseEntity.ok()
-                .headers(headers)
-                .contentLength(videoFile.length())
-                .contentType(MediaType.parseMediaType("video/mp4"))
-                .body(inputStreamResource);
+        return ResponseEntity.ok().headers(headers).contentLength(videoFile.length()).contentType(MediaType.parseMediaType("video/mp4")).body(inputStreamResource);
+    }
+
+    // 通用方法
+    public ResponseEntity<InputStreamResource> getVideo(String dir, String idOrName) throws FileNotFoundException {
+        // 读取视频文件
+        File videoFile = new File("src/main/resources/video/" + dir + "/" + idOrName + ".mp4");
+        //File videoFile = new File("D:\\software\\IDEA\\Project\\RWQX\\src\\main\\resources\\video\\dn\\1.mp4");
+        if (!videoFile.exists()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // 设置Header头，使浏览器可以识别视频文件类型
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+        headers.add("Pragma", "no-cache");
+        headers.add("Expires", "0");
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=");
+        headers.add("Accept-Ranges", "bytes");
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentDispositionFormData("attachment", "video.mp4");
+
+        // 将视频文件转换成InputStreamResource
+        InputStreamResource inputStreamResource = new InputStreamResource(new FileInputStream(videoFile));
+
+        // 返回ResponseEntity对象，包含InputStreamResource和Header头信息
+        return ResponseEntity.ok().headers(headers).contentLength(videoFile.length()).contentType(MediaType.parseMediaType("video/mp4")).body(inputStreamResource);
     }
 
 
