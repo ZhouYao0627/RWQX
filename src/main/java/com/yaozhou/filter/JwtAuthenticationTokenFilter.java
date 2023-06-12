@@ -1,6 +1,7 @@
 package com.yaozhou.filter;
 
 import com.alibaba.fastjson.JSON;
+import com.google.code.kaptcha.Producer;
 import com.yaozhou.domain.ResponseResult;
 import com.yaozhou.domain.entity.LoginUser;
 import com.yaozhou.enums.AppHttpCodeEnum;
@@ -9,6 +10,7 @@ import com.yaozhou.utils.RedisCache;
 import com.yaozhou.utils.WebUtils;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -21,6 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
+
+import static com.yaozhou.constants.SystemConstants.LOGIN_USER_KEY;
 
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
@@ -51,7 +55,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
         String userId = claims.getSubject();
         //从redis中获取用户信息
-        LoginUser loginUser = redisCache.getCacheObject("login:user" + userId);
+        LoginUser loginUser = redisCache.getCacheObject(LOGIN_USER_KEY + userId);
         //如果获取不到
         if (Objects.isNull(loginUser)) {
             //说明登录过期  提示重新登录

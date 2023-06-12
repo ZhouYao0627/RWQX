@@ -1,9 +1,12 @@
 package com.yaozhou.service.impl;
 
+import cn.hutool.core.io.FastByteArrayOutputStream;
 import cn.hutool.core.util.RandomUtil;
+import com.google.code.kaptcha.Producer;
 import com.yaozhou.domain.ResponseResult;
 import com.yaozhou.domain.entity.LoginUser;
 import com.yaozhou.domain.entity.User;
+import com.yaozhou.domain.vo.CodeVo;
 import com.yaozhou.domain.vo.LoginVo;
 import com.yaozhou.domain.vo.UserInfoVo;
 import com.yaozhou.enums.AppHttpCodeEnum;
@@ -19,9 +22,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.awt.image.Raster;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Base64;
+import java.util.Date;
 import java.util.Objects;
 
-import static com.yaozhou.constants.SystemConstants.LOGIN_KEY;
+import static com.yaozhou.constants.SystemConstants.*;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -29,6 +40,8 @@ public class LoginServiceImpl implements LoginService {
     private AuthenticationManager authenticationManager;
     @Autowired
     private RedisCache redisCache;
+    @Autowired
+    private Producer captchaProducer; // kaptcha 生成器
 
     @Override
     public ResponseResult login(User user) {
@@ -45,11 +58,11 @@ public class LoginServiceImpl implements LoginService {
         String jwt = JwtUtil.createJWT(userId);
 
         // 把用户信息存入redis
-        redisCache.setCacheObject("login:user" + userId, loginUser);
+        redisCache.setCacheObject(LOGIN_USER_KEY + userId, loginUser);
 
         // 判断验证码是否正确
         String userCode = user.getCode();
-        String code = redisCache.getCacheObject("login:code");
+        String code = redisCache.getCacheObject(LOGIN_CODE_KEY);
         if (!userCode.equals(code)) {
             throw new SystemException(AppHttpCodeEnum.CODE_ERROR);
         }
@@ -67,15 +80,32 @@ public class LoginServiceImpl implements LoginService {
         //获取userid
         Long userId = loginUser.getUser().getId();
         //删除redis中的用户信息
-        redisCache.deleteObject(LOGIN_KEY + userId);
+        redisCache.deleteObject(LOGIN_USER_KEY + userId);
         return ResponseResult.okResult();
     }
 
     @Override
-    public ResponseResult verifyCode() {
-        String code = RandomUtil.randomNumbers(4);
-        redisCache.setCacheObject("login:code", code);
-        return ResponseResult.okResult(code);
+    public ResponseResult verifyCode() throws IOException {
+        String code = RandomUtil.randomString(4);
+        redisCache.setCacheObject(LOGIN_CODE_KEY, code);
+
+        // 生成验证码图片
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        BufferedImage image = captchaProducer.createImage(code);
+        ImageIO.write(image, "jpg", outputStream);
+
+        // 生成captcha的token
+        //Map<String, Object> map = new HashMap<>();
+        //UUID codeKey = UUID.randomUUID();
+        //System.out.println("codeKey:" + codeKey);
+        ////保存验证码和对应的key
+        //redisUtils.set("code:" + codeKey, code, TimeUtils.MINUTES);
+        //map.put("codeKey", codeKey);
+        //map.put("img", Base64.getEncoder().encodeToString(outputStream.toByteArray()));
+
+        String codeString = Base64.getEncoder().encodeToString(outputStream.toByteArray());
+
+        return ResponseResult.okResult(codeString);
     }
 }
 

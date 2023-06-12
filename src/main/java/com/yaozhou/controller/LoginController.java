@@ -6,6 +6,8 @@ import com.yaozhou.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 public class LoginController {
     @Autowired
@@ -17,10 +19,9 @@ public class LoginController {
     }
 
     @GetMapping("/verifyCode")
-    public ResponseResult verifyCode() {
+    public ResponseResult verifyCode() throws IOException {
         return loginService.verifyCode();
     }
-
 
     @PostMapping("/logout")
     public ResponseResult logout() {

@@ -92,6 +92,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
+        <!-- 版本大家可以按照自己项目要求来，这里做演示就随便引入的版本 -->
+        <!-- PS:版本选择是一个很麻烦的过程，之前接触不到所以都没关注过 -->
+        <dependency>
+            <groupId>com.github.axet</groupId>
+            <artifactId>kaptcha</artifactId>
+            <version>0.0.9</version>
+        </dependency>
+
     </dependencies>
 
 </project>

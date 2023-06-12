@@ -6,5 +6,6 @@ public class SystemConstants {
     /**
      * 登录reids前缀
      */
-    public static final String LOGIN_KEY = "Login:";
+    public static final String LOGIN_USER_KEY = "login:user";
+    public static final String LOGIN_CODE_KEY = "login:code";
 }
