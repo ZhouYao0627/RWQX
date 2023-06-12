@@ -94,15 +94,6 @@ public class LoginServiceImpl implements LoginService {
         BufferedImage image = captchaProducer.createImage(code);
         ImageIO.write(image, "jpg", outputStream);
 
-        // 生成captcha的token
-        //Map<String, Object> map = new HashMap<>();
-        //UUID codeKey = UUID.randomUUID();
-        //System.out.println("codeKey:" + codeKey);
-        ////保存验证码和对应的key
-        //redisUtils.set("code:" + codeKey, code, TimeUtils.MINUTES);
-        //map.put("codeKey", codeKey);
-        //map.put("img", Base64.getEncoder().encodeToString(outputStream.toByteArray()));
-
         String codeString = Base64.getEncoder().encodeToString(outputStream.toByteArray());
 
         return ResponseResult.okResult(codeString);
