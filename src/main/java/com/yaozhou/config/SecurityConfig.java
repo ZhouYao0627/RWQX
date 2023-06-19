@@ -34,6 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 //关闭csrf
                 .csrf().disable()
+
+
+
                 //不通过Session获取SecurityContext
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
@@ -42,15 +45,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").anonymous()
                 // 视频需要认证才能通过
                 //.antMatchers("/video/FyVideo").authenticated()
-                //.antMatchers("/video/FxVideo").authenticated()
-                //.antMatchers("/video/DsVideo").authenticated()
-                //.antMatchers("/video/KpVideo").authenticated()
-                //.antMatchers("/video/CloudVideo").authenticated()
-                //.antMatchers("/video/VrVideo").authenticated()
-                //.antMatchers("/video/DnVideo").authenticated()
-                //.antMatchers("/video/WkVideo").authenticated()
-                //.antMatchers("/video/YyVideo").authenticated()
-                //.antMatchers("/video/GyVideo").authenticated()
                 // 除上面外的所有请求全部不需要认证即可访问
                 .anyRequest().permitAll();
         // 配置异常处理器

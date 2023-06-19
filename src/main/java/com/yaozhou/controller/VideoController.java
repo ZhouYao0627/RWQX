@@ -85,9 +85,10 @@ public class VideoController {
     }
 
     // 云游世界
+
     @GetMapping("/YyVideo")
     @ApiOperation(value = "云游世界")
-    @ApiImplicitParams(@ApiImplicitParam(name = "YyId", value = "视频id，共有3个视频，视频id为1，2，3"))
+    @ApiImplicitParams(@ApiImplicitParam(name = "YyId", value = "视频id，共有5个视频，视频id为1-5"))
     public ResponseEntity<InputStreamResource> getYyVideo(@RequestParam("YyId") String YyId) throws Exception {
         return videoService.getYyVideo(YyId);
     }
