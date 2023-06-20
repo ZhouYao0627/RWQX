@@ -12,6 +12,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
 @RestController
@@ -99,6 +101,11 @@ public class VideoController {
     @ApiImplicitParams(@ApiImplicitParam(name = "GyId", value = "视频id，共有5个视频，视频id为1，2，3，...，5"))
     public ResponseEntity<InputStreamResource> getGyVideo(@RequestParam("GyId") String GyId) throws Exception {
         return videoService.getGyVideo(GyId);
+    }
+
+    @GetMapping("/getVideoByNet")
+    public void getVideoByNet(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        videoService.getVideoByNet(request, response);
     }
 
 }

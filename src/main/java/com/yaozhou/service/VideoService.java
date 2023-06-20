@@ -4,6 +4,8 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -28,4 +30,6 @@ public interface VideoService {
     ResponseEntity<InputStreamResource> getGyVideo(String gyId) throws FileNotFoundException;
 
     ResponseEntity<InputStreamResource> getFyVideo(String fyName)throws Exception;
+
+    void getVideoByNet(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
