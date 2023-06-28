@@ -65,7 +65,8 @@ public class VideoController {
     // VR气象站
     @GetMapping("/VrVideo")
     @ApiOperation(value = "VR气象站")
-    @ApiImplicitParams(@ApiImplicitParam(name = "VrId", value = "视频id，共有16个视频，视频id为0，1，2，...，15，其中视频id为0代表气象站总体介绍视频，1-3代表温度传感器，以此类推"))
+    @ApiImplicitParams(@ApiImplicitParam(name = "VrId", value = "视频id，共有16个视频，视频id为0，1，2，...，21，其中视频id为0代表气象站总体介绍视频，1-3温度传感器，4-6湿度传感器，" +
+            "7-9风速传感器，10-12压强传感器，13-15降水传感器，16-18风向传感器，19-21太阳能传感器"))
     public ResponseEntity<InputStreamResource> getVRVideo(@RequestParam("VrId") String VrId) throws Exception {
         return videoService.getVRVideo(VrId);
     }
