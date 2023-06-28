@@ -150,6 +150,7 @@ public class VideoServiceImpl implements VideoService {
         response.flushBuffer();
     }
 
+
     // 通用方法
     public ResponseEntity<InputStreamResource> getVideo(String dir, String idOrName) throws FileNotFoundException {
         // 读取视频文件
