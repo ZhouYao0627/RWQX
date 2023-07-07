@@ -11,5 +11,5 @@ import java.awt.image.BufferedImage;
 @NoArgsConstructor
 public class CodeVo {
     private String code;
-    private BufferedImage image;
+    private String image;
 }
