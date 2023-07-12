@@ -21,7 +21,6 @@ import java.io.*;
 @Slf4j
 @Api(tags = "视频相关接口")
 public class VideoController {
-
     @Autowired
     private VideoService videoService;
 
