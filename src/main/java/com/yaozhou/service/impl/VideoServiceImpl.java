@@ -16,6 +16,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+//import org.json.JSONObject;
 
 @Service
 public class VideoServiceImpl implements VideoService {
@@ -128,6 +129,63 @@ public class VideoServiceImpl implements VideoService {
             e.printStackTrace();
         }
     }
+
+    private static final String API_URL = "https://api.bilibili.com/";
+
+    @Override
+    public void getVideoByBiliBili() {
+
+        //https://www.bilibili.com/video/BV16s411E7UE/?share_source=copy_web&vd_source=ad10dc54f8ec866ebe04c4e521a0c143
+
+        String videoId = "BV16s411E7UE"; // 替换为要下载的视频ID
+
+        try {
+            // 构建API请求URL
+            String apiUrl = String.format(API_URL, videoId);
+
+            // 发送API请求，获取视频信息
+            String videoInfoJson = sendGetRequest(apiUrl);
+
+            // 解析视频信息，提取视频URL
+            String videoUrl = extractVideoUrl(videoInfoJson);
+
+            // 下载视频文件
+            //downloadVideo(videoUrl, "video.mp4"); // 下载的视频文件名为video.mp4
+
+            //System.out.println("视频下载成功！");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static String sendGetRequest(String apiUrl) throws IOException {
+        URL url = new URL(apiUrl);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+
+        // 添加其他必要的请求头或身份验证信息
+        int responseCode = connection.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+            return response.toString();
+        } else {
+            throw new IOException("API请求失败，响应代码：" + responseCode);
+        }
+    }
+
+    private static String extractVideoUrl(String videoInfoJson) {
+        JSONObject jsonObject = new JSONObject(videoInfoJson);
+        JSONObject data = jsonObject.getJSONObject("data");
+        String videoUrl = data.getString("url");
+        return videoUrl;
+    }
+
 
     public void getVideoNew(HttpServletRequest request, HttpServletResponse response, String urlId, String urlNum) throws Exception {
         String path = "https://v.youku.com/v_show/id_" + urlId + "==.html?s=63efbfbd202befbfbd47&spm=a2hje.13141534.1_3.d_1_" + urlNum;

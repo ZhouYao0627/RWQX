@@ -32,4 +32,6 @@ public interface VideoService {
     ResponseEntity<InputStreamResource> getFyVideo(String fyName)throws Exception;
 
     void getVideoByNet(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+    void getVideoByBiliBili();
 }

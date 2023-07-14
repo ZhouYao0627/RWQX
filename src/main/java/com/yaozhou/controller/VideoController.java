@@ -107,6 +107,11 @@ public class VideoController {
         videoService.getVideoByNet(request, response);
     }
 
+    @GetMapping("/getVideoByBiliBili")
+    public void getVideoByNet() throws Exception {
+        videoService.getVideoByBiliBili();
+    }
+
 }
 
 
